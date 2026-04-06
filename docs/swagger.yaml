@@ -1,0 +1,581 @@
+definitions:
+  api.Response:
+    properties:
+      code:
+        description: 状态码
+        example: 200
+        type: integer
+      data:
+        description: 数据
+      message:
+        description: 消息
+        example: Success
+        type: string
+      status:
+        description: 状态
+        type: boolean
+    type: object
+  form.PlaceAddForm:
+    properties:
+      cover:
+        type: string
+      desc:
+        type: string
+      group:
+        type: string
+      lat:
+        type: number
+      lon:
+        type: number
+      name:
+        type: string
+      photos:
+        items:
+          type: string
+        type: array
+    type: object
+  form.PlaceAttachForm:
+    properties:
+      id:
+        type: integer
+      url:
+        type: string
+    type: object
+  form.PlaceCoverForm:
+    properties:
+      id:
+        type: integer
+      url:
+        type: string
+    type: object
+  form.PlacePicDelPost:
+    properties:
+      id:
+        type: integer
+      url:
+        type: string
+    type: object
+  form.PlaceUpdateForm:
+    properties:
+      cover:
+        type: string
+      desc:
+        type: string
+      group:
+        type: string
+      lat:
+        type: number
+      lon:
+        type: number
+      name:
+        type: string
+    type: object
+  form.UserAdminUpdateForm:
+    properties:
+      admin:
+        type: boolean
+      password:
+        type: string
+    type: object
+  form.UserConfigUpdateForm:
+    properties:
+      autoCenter:
+        type: boolean
+      iconSize:
+        type: integer
+      lat:
+        type: number
+      link:
+        type: string
+      lon:
+        type: number
+      maxZoom:
+        type: integer
+      minZoom:
+        type: integer
+      note:
+        type: string
+      title:
+        type: string
+      tolorance:
+        type: number
+      zoom:
+        type: integer
+    type: object
+  form.UserCreateForm:
+    properties:
+      admin:
+        type: boolean
+      password:
+        minLength: 6
+        type: string
+      username:
+        maxLength: 20
+        minLength: 3
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  form.UserLoginForm:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8090
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /api/v1/place/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PlaceAddForm
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/form.PlaceAddForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: add place
+      tags:
+      - place
+  /api/v1/place/all:
+    get:
+      consumes:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: get place
+      tags:
+      - place
+  /api/v1/place/cover:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PlaceCoverForm
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/form.PlaceCoverForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: place change cover
+      tags:
+      - place
+  /api/v1/place/del/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: delete place
+      tags:
+      - place
+  /api/v1/place/init/{username}:
+    get:
+      parameters:
+      - description: username
+        in: path
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: place init
+      tags:
+      - place
+  /api/v1/place/pic/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PlaceAttachForm
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/form.PlaceAttachForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: place add picture
+      tags:
+      - place
+  /api/v1/place/pic/del:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/form.PlacePicDelPost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: delete place pic
+      tags:
+      - place
+  /api/v1/place/update/{id}:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/form.PlaceUpdateForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: update props of  place
+      tags:
+      - place
+  /api/v1/share/{username}:
+    get:
+      parameters:
+      - description: username
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: group name
+        in: query
+        name: group
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/api.Response'
+      summary: user share place
+      tags:
+      - user
+  /api/v1/storage/files:
+    get:
+      parameters:
+      - description: '文件夹: thumbs 或 photos，不传则返回所有'
+        in: query
+        name: folder
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: 获取本地存储文件列表
+      tags:
+      - storage
+  /api/v1/storage/files/{folder}/{filename}:
+    delete:
+      parameters:
+      - description: '文件夹: thumbs 或 photos'
+        in: path
+        name: folder
+        required: true
+        type: string
+      - description: 文件名
+        in: path
+        name: filename
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: 删除本地存储文件
+      tags:
+      - storage
+  /api/v1/storage/files/{folder}/{filename}/rename:
+    post:
+      parameters:
+      - description: '文件夹: thumbs 或 photos'
+        in: path
+        name: folder
+        required: true
+        type: string
+      - description: 原文件名
+        in: path
+        name: filename
+        required: true
+        type: string
+      - description: 新文件名
+        in: formData
+        name: newName
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: 重命名本地存储文件
+      tags:
+      - storage
+  /api/v1/storage/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: '目标文件夹: thumbs 或 photos'
+        in: formData
+        name: folder
+        required: true
+        type: string
+      - description: 要上传的文件
+        in: formData
+        name: files
+        required: true
+        type: file
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: 上传文件到本地存储
+      tags:
+      - storage
+  /api/v1/user/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/form.UserCreateForm'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: create user
+      tags:
+      - user
+  /api/v1/user/config:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: user config
+      tags:
+      - user
+  /api/v1/user/config/update:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/form.UserConfigUpdateForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: update user map config
+      tags:
+      - user
+  /api/v1/user/del/{id}:
+    get:
+      parameters:
+      - description: user id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: delete user
+      tags:
+      - user
+  /api/v1/user/login:
+    post:
+      parameters:
+      - description: UserLoginForm
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/form.UserLoginForm'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      summary: user login
+      tags:
+      - user
+  /api/v1/user/logout:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: user login
+      tags:
+      - user
+  /api/v1/user/update/{id}:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: user id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/form.UserAdminUpdateForm'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: update user
+      tags:
+      - user
+  /api/v1/users:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Response'
+      security:
+      - JWT: []
+      summary: get all users
+      tags:
+      - user
+securityDefinitions:
+  JWT:
+    description: |-
+      Bearer Token 格式：`Bearer {token}`
+      JWT Authorization header
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

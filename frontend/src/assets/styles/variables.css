@@ -1,0 +1,43 @@
+:root {
+  /* Colors */
+  --color-primary: #409EFF;
+  --color-success: #67C23A;
+  --color-warning: #E6A23C;
+  --color-danger: #F56C6C;
+  --color-info: #909399;
+
+  /* Text */
+  --text-primary: #303133;
+  --text-regular: #606266;
+  --text-secondary: #909399;
+  --text-placeholder: #C0C4CC;
+
+  /* Border */
+  --border-color-base: #DCDFE6;
+  --border-color-light: #E4E7ED;
+  --border-color-lighter: #EBEEF5;
+  --border-color-extra-light: #F2F6FC;
+
+  /* Layout */
+  --sidebar-width: 220px;
+  --header-height: 60px;
+  --mobile-header-height: 50px;
+  --mobile-nav-height: 56px;
+
+  /* Breakpoints */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 1024px;
+  --breakpoint-lg: 1280px;
+  --looker-width: 40em;
+  --looker-height: 45em;
+  --looker-btn-gap: 2em;
+}
+
+@media (min-width: 0px) and (max-width: 700px) {
+  :root {
+    --looker-width: 100%;
+    --looker-height: 100dvh;
+    --looker-btn-gap: 2em;
+  }
+}
