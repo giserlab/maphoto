@@ -10,9 +10,11 @@ Maphoto—在地图上展示照片。
 - 支持多用户
 - 支持地图配置
 
+
+
 ## 使用
 
-前往[Releases][]下载对应系统的可执行二进制文件，接着运行：
+前往[Releases](https://codeberg.org/giserlab/maphoto/releases)下载对应系统的可执行二进制文件，接着运行：
 
 ```bash
 maphoto serve
