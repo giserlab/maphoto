@@ -24,3 +24,25 @@ maphoto serve
 
 
 
+## 开发和编译
+
+仓库仓库后在根目录执行
+
+```bash
+go mod tidy
+```
+
+终端进入`frontend`目录，执行pnpm安装依赖
+
+```bash
+pnpm i 
+```
+
+在根目录运行makefile
+
+```bash
+make
+```
+
+
+
